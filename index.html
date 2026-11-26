@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taniya Munankar | Full-Stack Developer & AI Enthusiast</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Lucide Icons via CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        slate: {
+                            850: '#151e2e',
+                            950: '#090d16',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom subtle scrollbar & animations */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #4f46e5;
+            border-radius: 9999px;
+        }
+        .glass-card {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* Print Styles for clean PDF Resume/Portfolio Export */
+        @media print {
+            body {
+                background: #ffffff !important;
+                color: #111827 !important;
+                font-size: 11pt !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .print-only {
+                display: block !important;
+            }
+            section {
+                padding-top: 1.25rem !important;
+                padding-bottom: 1.25rem !important;
+                page-break-inside: avoid;
+            }
+            .card-print {
+                border: 1px solid #e5e7eb !important;
+                background: #ffffff !important;
+                color: #111827 !important;
+                box-shadow: none !important;
+            }
+            .gradient-text {
+                -webkit-text-fill-color: #3730a3 !important;
+                color: #3730a3 !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-300 antialiased selection:bg-indigo-500 selection:text-white">
+
+    <!-- Toast Notification Banner (Replaces alert()) -->
+    <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none no-print">
+        <div class="flex items-center gap-3 bg-slate-900 dark:bg-indigo-600 text-white px-4 py-3 rounded-xl shadow-2xl border border-slate-700 dark:border-indigo-400/40">
+            <i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-400 dark:text-white shrink-0"></i>
+            <span id="toast-message" class="text-sm font-medium">Copied to clipboard!</span>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <header class="sticky top-0 z-40 w-full border-b border-slate-200/80 dark:border-slate-800/80 bg-white/80 dark:bg-slate-950/80 glass-card no-print">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <!-- Brand / Monogram -->
+            <a href="#" class="flex items-center gap-2.5 group">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-600 to-cyan-500 flex items-center justify-center text-white font-bold font-mono text-sm shadow-md group-hover:scale-105 transition-transform">
+                    TM
+                </div>
+                <span class="font-bold text-lg tracking-tight text-slate-900 dark:text-white">
+                    Taniya<span class="text-indigo-600 dark:text-indigo-400">.dev</span>
+                </span>
+            </a>
+
+            <!-- Desktop Navigation Links -->
+            <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-slate-600 dark:text-slate-300">
+                <a href="#about" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">About</a>
+                <a href="#experience" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Experience</a>
+                <a href="#projects" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Projects</a>
+                <a href="#skills" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Skills</a>
+                <a href="#education" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Education</a>
+                <a href="#contact" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Contact</a>
+            </nav>
+
+            <!-- Action Controls -->
+            <div class="flex items-center gap-2 sm:gap-3">
+                <!-- Print / Save PDF Button -->
+                <button onclick="window.print()" title="Print or Save Portfolio as PDF" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 transition-all">
+                    <i data-lucide="printer" class="w-3.5 h-3.5 text-indigo-500"></i>
+                    <span>Save PDF</span>
+                </button>
+
+                <!-- Theme Toggle -->
+                <button id="theme-toggle" aria-label="Toggle Dark/Light Mode" class="p-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 transition-all">
+                    <i data-lucide="sun" class="w-4 h-4 hidden dark:block text-amber-400"></i>
+                    <i data-lucide="moon" class="w-4 h-4 block dark:hidden text-indigo-600"></i>
+                </button>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" aria-label="Open Navigation Menu" class="md:hidden p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700">
+                    <i data-lucide="menu" class="w-5 h-5"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Dropdown Nav -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 py-4 space-y-2">
+            <a href="#about" class="mobile-nav-link block px-3 py-2 rounded-lg text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800">About</a>
+            <a href="#experience" class="mobile-nav-link block px-3 py-2 rounded-lg text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800">Experience</a>
+            <a href="#projects" class="mobile-nav-link block px-3 py-2 rounded-lg text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800">Projects</a>
+            <a href="#skills" class="mobile-nav-link block px-3 py-2 rounded-lg text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800">Skills</a>
+            <a href="#education" class="mobile-nav-link block px-3 py-2 rounded-lg text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800">Education</a>
+            <a href="#contact" class="mobile-nav-link block px-3 py-2 rounded-lg text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800">Contact & Links</a>
+            <button onclick="window.print()" class="w-full mt-2 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold bg-indigo-600 text-white">
+                <i data-lucide="printer" class="w-4 h-4"></i>
+                <span>Save Portfolio as PDF</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <!-- HERO SECTION -->
+        <section class="pt-12 pb-16 sm:pt-20 sm:pb-24 relative overflow-hidden">
+            <!-- Decorative ambient glow -->
+            <div class="absolute -top-24 -right-24 w-80 h-80 bg-indigo-500/15 dark:bg-indigo-500/20 rounded-full blur-3xl pointer-events-none no-print"></div>
+            <div class="absolute top-40 -left-24 w-72 h-72 bg-cyan-500/15 dark:bg-cyan-500/15 rounded-full blur-3xl pointer-events-none no-print"></div>
+
+            <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                <!-- Left Column: Intro -->
+                <div class="lg:col-span-8 space-y-6">
+                    <!-- Availability Badge -->
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                        <span>Open to Software Developer / Full-Stack & AI Roles</span>
+                    </div>
+
+                    <div class="space-y-2">
+                        <p class="text-sm font-mono uppercase tracking-wider text-indigo-600 dark:text-indigo-400 font-semibold">
+                            Hello, I'm
+                        </p>
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight">
+                            Taniya Munankar
+                        </h1>
+                        <p class="text-sm text-slate-500 dark:text-slate-400 font-medium">
+                            Taniya Tulshidas Munankar
+                        </p>
+                    </div>
+
+                    <h2 class="text-xl sm:text-2xl font-bold gradient-text leading-snug">
+                        Full-Stack Web Developer | AI & Cybersecurity Enthusiast | MCA Student
+                    </h2>
+
+                    <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-2xl leading-relaxed">
+                        Building scalable full-stack web applications, enterprise desktop solutions, and local AI-powered learning tools with a strong foundation in software engineering and secure cloud systems.
+                    </p>
+
+                    <!-- Location & Academic Highlight -->
+                    <div class="flex flex-wrap items-center gap-4 text-sm text-slate-600 dark:text-slate-400">
+                        <span class="inline-flex items-center gap-1.5">
+                            <i data-lucide="map-pin" class="w-4 h-4 text-indigo-500"></i>
+                            Kudal, Sindhudurg, Maharashtra, India
+                        </span>
+                        <span class="hidden sm:inline text-slate-300 dark:text-slate-700">•</span>
+                        <span class="inline-flex items-center gap-1.5">
+                            <i data-lucide="graduation-cap" class="w-4 h-4 text-cyan-500"></i>
+                            MCA @ SPPU | BCA (8.71 CGPA)
+                        </span>
+                    </div>
+
+                    <!-- Primary CTAs -->
+                    <div class="pt-2 flex flex-wrap items-center gap-3.5 no-print">
+                        <a href="#projects" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-600/25 transition-all hover:-translate-y-0.5">
+                            <span>View Featured Projects</span>
+                            <i data-lucide="arrow-down-right" class="w-4 h-4"></i>
+                        </a>
+                        <button onclick="copyRecruiterPitch()" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl font-semibold text-sm bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-100 border border-slate-200 dark:border-slate-700 shadow-sm transition-all">
+                            <i data-lucide="copy" class="w-4 h-4 text-indigo-500"></i>
+                            <span>Copy Summary for LinkedIn</span>
+                        </button>
+                        <a href="#contact" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl font-semibold text-sm text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-950/50 transition-all">
+                            <span>Contact & Links</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right Column: Developer Profile Card -->
+                <div class="lg:col-span-4">
+                    <div class="p-6 rounded-2xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 shadow-xl card-print space-y-5">
+                        <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-cyan-500 flex items-center justify-center text-white font-bold text-lg shadow-md">
+                                    TM
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-slate-900 dark:text-white text-base">Developer Snapshot</h3>
+                                    <p class="text-xs text-slate-500 dark:text-slate-400 font-mono">portfolio.v2026</p>
+                                </div>
+                            </div>
+                            <span class="px-2.5 py-1 rounded-lg text-xs font-mono font-semibold bg-indigo-500/10 text-indigo-600 dark:text-indigo-400">
+                                Verified
+                            </span>
+                        </div>
+
+                        <div class="space-y-3 text-sm">
+                            <div class="flex justify-between items-center py-1.5 border-b border-slate-100 dark:border-slate-800/70">
+                                <span class="text-slate-500 dark:text-slate-400">Current Degree</span>
+                                <span class="font-semibold text-slate-800 dark:text-slate-200">MCA (SPPU Online)</span>
+                            </div>
+                            <div class="flex justify-between items-center py-1.5 border-b border-slate-100 dark:border-slate-800/70">
+                                <span class="text-slate-500 dark:text-slate-400">BCA Score</span>
+                                <span class="font-semibold text-emerald-600 dark:text-emerald-400">8.71 CGPA (2026)</span>
+                            </div>
+                            <div class="flex justify-between items-center py-1.5 border-b border-slate-100 dark:border-slate-800/70">
+                                <span class="text-slate-500 dark:text-slate-400">Core Stacks</span>
+                                <span class="font-semibold text-slate-800 dark:text-slate-200">MERN • C# .NET • PHP</span>
+                            </div>
+                            <div class="flex justify-between items-center py-1.5">
+                                <span class="text-slate-500 dark:text-slate-400">Focus Areas</span>
+                                <span class="font-semibold text-slate-800 dark:text-slate-200">Full-Stack, AI & Security</span>
+                            </div>
+                        </div>
+
+                        <div class="pt-2 grid grid-cols-3 gap-2 text-center">
+                            <div class="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/60">
+                                <div class="text-lg font-extrabold text-indigo-600 dark:text-indigo-400">3+</div>
+                                <div class="text-[11px] text-slate-500 dark:text-slate-400">Major Apps</div>
+                            </div>
+                            <div class="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/60">
+                                <div class="text-lg font-extrabold text-cyan-600 dark:text-cyan-400">8.71</div>
+                                <div class="text-[11px] text-slate-500 dark:text-slate-400">BCA CGPA</div>
+                            </div>
+                            <div class="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/60">
+                                <div class="text-lg font-extrabold text-purple-600 dark:text-purple-400">4</div>
+                                <div class="text-[11px] text-slate-500 dark:text-slate-400">Certificates</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT ME SECTION -->
+        <section id="about" class="py-14 border-t border-slate-200/80 dark:border-slate-800/80">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <div class="lg:col-span-4">
+                    <span class="text-xs font-mono uppercase tracking-widest text-indigo-600 dark:text-indigo-400 font-semibold">01 / Profile</span>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mt-1">About Me</h2>
+                    <div class="w-12 h-1 bg-indigo-600 rounded-full mt-3"></div>
+                </div>
+                <div class="lg:col-span-8">
+                    <div class="p-6 sm:p-8 rounded-2xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 shadow-sm card-print space-y-4">
+                        <p class="text-base sm:text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
+                            Resourceful and detail-oriented software developer currently pursuing an online <strong class="text-slate-900 dark:text-white font-semibold">Master of Computer Applications (MCA)</strong> at <strong class="text-slate-900 dark:text-white font-semibold">Savitribai Phule Pune University (SPPU – Online)</strong> after graduating with a <strong class="text-indigo-600 dark:text-indigo-400 font-semibold">BCA (8.71 CGPA)</strong>.
+                        </p>
+                        <p class="text-base text-slate-600 dark:text-slate-300 leading-relaxed">
+                            Passionate about building full-stack web applications, AI-integrated tools, and secure cloud/software systems. Experienced with <strong class="text-slate-800 dark:text-slate-200">MERN stack development</strong>, <strong class="text-slate-800 dark:text-slate-200">C# .NET desktop/enterprise applications</strong>, <strong class="text-slate-800 dark:text-slate-200">PHP/MySQL web apps</strong>, and modern AI workflows.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EXPERIENCE SECTION -->
+        <section id="experience" class="py-14 border-t border-slate-200/80 dark:border-slate-800/80">
+            <div class="mb-10">
+                <span class="text-xs font-mono uppercase tracking-widest text-indigo-600 dark:text-indigo-400 font-semibold">02 / Career</span>
+                <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mt-1">Work Experience</h2>
+                <div class="w-12 h-1 bg-indigo-600 rounded-full mt-3"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Experience 1 -->
+                <div class="p-6 rounded-2xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 hover:border-indigo-500/50 transition-all shadow-sm card-print flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-start justify-between gap-4 mb-4">
+                            <div class="p-3 rounded-xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400">
+                                <i data-lucide="code-2" class="w-6 h-6"></i>
+                            </div>
+                            <span class="px-3 py-1 rounded-full text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
+                                1 Month Internship
+                            </span>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white">
+                            MERN Stack Developer Intern
+                        </h3>
+                        <p class="text-sm font-semibold text-indigo-600 dark:text-indigo-400 mt-0.5">
+                            Softmusk Info Pvt. Ltd.
+                        </p>
+                        <p class="text-sm text-slate-600 dark:text-slate-300 mt-3 leading-relaxed">
+                            Assisted with full-stack web application development, REST APIs, database operations, and debugging across modern JavaScript architectures.
+                        </p>
+                    </div>
+                    <div class="mt-5 pt-4 border-t border-slate-100 dark:border-slate-800 flex flex-wrap gap-2">
+                        <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">MongoDB</span>
+                        <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Express.js</span>
+                        <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">React.js</span>
+                        <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Node.js</span>
+                    </div>
+                </div>
+
+                <!-- Experience 2 -->
+                <div class="p-6 rounded-2xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 hover:border-cyan-500/50 transition-all shadow-sm card-print flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-start justify-between gap-4 mb-4">
+                            <div class="p-3 rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400">
+                                <i data-lucide="palette" class="w-6 h-6"></i>
+                            </div>
+                            <span class="px-3 py-1 rounded-full text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
+                                Freelance
+                            </span>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white">
+                            Freelance Designer & Web Developer
+                        </h3>
+                        <p class="text-sm font-semibold text-cyan-600 dark:text-cyan-400 mt-0.5">
+                            Tritva (Brand)
+                        </p>
+                        <p class="text-sm text-slate-600 dark:text-slate-300 mt-3 leading-relaxed">
+                            Designed logos, social media graphics, custom printed apparel, and responsive web solutions tailored to brand identity and client goals.
+                        </p>
+                    </div>
+                    <div class="mt-5 pt-4 border-t border-slate-100 dark:border-slate-800 flex flex-wrap gap-2">
+                        <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Web Solutions</span>
+                        <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Brand Identity</span>
+                        <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">UI/Graphics</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FEATURED PROJECTS SECTION -->
+        <section id="projects" class="py-14 border-t border-slate-200/80 dark:border-slate-800/80">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-10">
+                <div>
+                    <span class="text-xs font-mono uppercase tracking-widest text-indigo-600 dark:text-indigo-400 font-semibold">03 / Engineering Work</span>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mt-1">Featured Projects</h2>
+                    <div class="w-12 h-1 bg-indigo-600 rounded-full mt-3"></div>
+                </div>
+
+                <!-- Interactive Filter Buttons -->
+                <div class="flex flex-wrap gap-2 no-print" role="group" aria-label="Filter projects">
+                    <button onclick="filterProjects('all')" data-filter="all" class="filter-btn active px-4 py-2 rounded-xl text-xs font-semibold bg-indigo-600 text-white shadow-sm transition-all">
+                        All
+                    </button>
+                    <button onclick="filterProjects('fullstack')" data-filter="fullstack" class="filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:border-indigo-500 transition-all">
+                        Full-Stack
+                    </button>
+                    <button onclick="filterProjects('ai')" data-filter="ai" class="filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:border-indigo-500 transition-all">
+                        AI
+                    </button>
+                    <button onclick="filterProjects('dotnet-php')" data-filter="dotnet-php" class="filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:border-indigo-500 transition-all">
+                        .NET / PHP
+                    </button>
+                </div>
+            </div>
+
+            <!-- Projects Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6" id="projects-grid">
+                
+                <!-- Project 1: LabMasterPro -->
+                <article data-categories="dotnet-php" class="project-card group p-6 rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-indigo-500/60 transition-all duration-300 shadow-sm hover:shadow-xl card-print flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between gap-2 mb-4">
+                            <div class="p-3 rounded-xl bg-blue-500/10 text-blue-600 dark:text-blue-400">
+                                <i data-lucide="flask-conical" class="w-6 h-6"></i>
+                            </div>
+                            <span class="px-2.5 py-1 rounded-lg text-[11px] font-mono font-semibold bg-blue-500/10 text-blue-600 dark:text-blue-400">
+                                .NET / Enterprise
+                            </span>
+                        </div>
+
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                            LabMasterPro
+                        </h3>
+                        <p class="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-0.5">
+                            Laboratory Management System
+                        </p>
+
+                        <p class="text-sm text-slate-600 dark:text-slate-300 mt-3 leading-relaxed">
+                            Enterprise diagnostic lab software featuring comprehensive doctor and patient management, diagnostic test entry, automated report generation and printing, and integrated billing management.
+                        </p>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800">
+                        <div class="flex flex-wrap gap-1.5">
+                            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">C# .NET</span>
+                            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">SQL Server</span>
+                            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Automated Reports</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 2: AI Flashcard -->
+                <article data-categories="ai fullstack" class="project-card group p-6 rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-purple-500/60 transition-all duration-300 shadow-sm hover:shadow-xl card-print flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between gap-2 mb-4">
+                            <div class="p-3 rounded-xl bg-purple-500/10 text-purple-600 dark:text-purple-400">
+                                <i data-lucide="sparkles" class="w-6 h-6"></i>
+                            </div>
+                            <span class="px-2.5 py-1 rounded-lg text-[11px] font-mono font-semibold bg-purple-500/10 text-purple-600 dark:text-purple-400">
+                                AI + Full-Stack
+                            </span>
+                        </div>
+
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+                            AI Flashcard – Learn & Test System
+                        </h3>
+                        <p class="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-0.5">
+                            Adaptive Study & Quiz Platform
+                        </p>
+
+                        <p class="text-sm text-slate-600 dark:text-slate-300 mt-3 leading-relaxed">
+                            Generates AI-powered flashcards using local LLM inference via the Ollama API, featuring interactive Learn and Quiz modes engineered for adaptive studying and self-assessment.
+                        </p>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800">
+                        <div class="flex flex-wrap gap-1.5">
+                            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">React.js</span>
+                            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Node.js</span>
+                            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Python</span>
+                            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Ollama API</span>
+                            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">PHP</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 3: Online Assignment Submission System -->
+                <article data-categories="fullstack dotnet-php" class="project-card group p-6 rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-cyan-500/60 transition-all duration-300 shadow-sm hover:shadow-xl card-print flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between gap-2 mb-4">
+                            <div class="p-3 rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400">
+                                <i data-lucide="file-check-2" class="w-6 h-6"></i>
+                            </div>
+                            <span class="px-2.5 py-1 rounded-lg text-[11px] font-mono font-semibold bg-cyan-500/10 text-cyan-600 dark:text-cyan-400">
+                                Full-Stack / PHP
+                            </span>
+                        </div>
+
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">
+                            Online Assignment Submission System
+                        </h3>
+                        <p class="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-0.5">
+                            Academic Workflow Web Application
+                        </p>
+
+                        <p class="text-sm text-slate-600 dark:text-slate-300 mt-3 leading-relaxed">
+                            Streamlines student assignment uploads, deadline & submission tracking, and structured faculty evaluation workflows through a clean, responsive portal.
+                        </p>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800">
+                        <div class="flex flex-wrap gap-1.5">
+                            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">PHP</span>
+                            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">MySQL</span>
+                            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">JavaScript</span>
+                            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Bootstrap</span>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- TECHNICAL SKILLS SECTION -->
+        <section id="skills" class="py-14 border-t border-slate-200/80 dark:border-slate-800/80">
+            <div class="mb-10">
+                <span class="text-xs font-mono uppercase tracking-widest text-indigo-600 dark:text-indigo-400 font-semibold">04 / Tech Stack</span>
+                <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mt-1">Technical Skills</h2>
+                <div class="w-12 h-1 bg-indigo-600 rounded-full mt-3"></div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <!-- Category 1: Languages -->
+                <div class="p-6 rounded-2xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 shadow-sm card-print">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="p-2.5 rounded-xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400">
+                            <i data-lucide="terminal" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="font-bold text-slate-900 dark:text-white text-base">Languages</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200/70 dark:border-slate-700">JavaScript</span>
+                        <span class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200/70 dark:border-slate-700">Python</span>
+                        <span class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200/70 dark:border-slate-700">PHP</span>
+                        <span class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200/70 dark:border-slate-700">Java</span>
+                        <span class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200/70 dark:border-slate-700">C#</span>
+                        <span class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200/70 dark:border-slate-700">HTML5</span>
+                        <span class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200/70 dark:border-slate-700">CSS3</span>
+                    </div>
+                </div>
+
+                <!-- Category 2: Frameworks & Libraries -->
+                <div class="p-6 rounded-2xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 shadow-sm card-print">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="p-2.5 rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400">
+                            <i data-lucide="layers" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="font-bold text-slate-900 dark:text-white text-base">Frameworks & Libraries</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200/70 dark:border-slate-700">React.js</span>
+                        <span class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200/70 dark:border-slate-700">Node.js</span>
+                        <span class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200/70 dark:border-slate-700">.NET</span>
+                        <span class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200/70 dark:border-slate-700">Bootstrap</span>
+                        <span class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200/70 dark:border-slate-700">Tailwind CSS</span>
+                    </div>
+                </div>
+
+                <!-- Category 3: Databases & AI/APIs -->
+                <div class="p-6 rounded-2xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 shadow-sm card-print">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="p-2.5 rounded-xl bg-purple-500/10 text-purple-600 dark:text-purple-400">
+                            <i data-lucide="cpu" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="font-bold text-slate-900 dark:text-white text-base">Databases & AI / APIs</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200/70 dark:border-slate-700">MySQL</span>
+                        <span class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200/70 dark:border-slate-700">SQL Server</span>
+                        <span class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200/70 dark:border-slate-700">Ollama API</span>
+                        <span class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200/70 dark:border-slate-700">Generative AI Workflows</span>
+                    </div>
+                </div>
+
+                <!-- Category 4: Cloud, Security & Tools -->
+                <div class="p-6 rounded-2xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 shadow-sm card-print">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="p-2.5 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
+                            <i data-lucide="shield-check" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="font-bold text-slate-900 dark:text-white text-base">Cloud, Security & Tools</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200/70 dark:border-slate-700">AWS (IAM, S3, EC2)</span>
+                        <span class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200/70 dark:border-slate-700">Networking (TCP/IP, DNS, DHCP)</span>
+                        <span class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200/70 dark:border-slate-700">GitHub</span>
+                        <span class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200/70 dark:border-slate-700">VS Code</span>
+                        <span class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200/70 dark:border-slate-700">Visual Studio</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EDUCATION & CERTIFICATIONS SECTION -->
+        <section id="education" class="py-14 border-t border-slate-200/80 dark:border-slate-800/80">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+                
+                <!-- Education Timeline (7 Cols) -->
+                <div class="lg:col-span-7">
+                    <div class="mb-8">
+                        <span class="text-xs font-mono uppercase tracking-widest text-indigo-600 dark:text-indigo-400 font-semibold">05 / Academics</span>
+                        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mt-1">Education</h2>
+                        <div class="w-12 h-1 bg-indigo-600 rounded-full mt-3"></div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <!-- MCA -->
+                        <div class="p-5 rounded-2xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 card-print relative overflow-hidden">
+                            <div class="flex flex-wrap items-center justify-between gap-2 mb-1">
+                                <span class="px-2.5 py-0.5 rounded-md text-xs font-semibold bg-indigo-500/10 text-indigo-600 dark:text-indigo-400">
+                                    Pursuing (Semester 1, 2026)
+                                </span>
+                            </div>
+                            <h3 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
+                                Master of Computer Applications (MCA)
+                            </h3>
+                            <p class="text-sm text-slate-600 dark:text-slate-300 mt-0.5">
+                                Savitribai Phule Pune University (SPPU – Online)
+                            </p>
+                        </div>
+
+                        <!-- BCA -->
+                        <div class="p-5 rounded-2xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 card-print">
+                            <div class="flex flex-wrap items-center justify-between gap-2 mb-1">
+                                <span class="px-2.5 py-0.5 rounded-md text-xs font-semibold bg-emerald-500/10 text-emerald-700 dark:text-emerald-400">
+                                    Graduated 2026 • CGPA: 8.71
+                                </span>
+                            </div>
+                            <h3 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
+                                Bachelor of Computer Applications (BCA)
+                            </h3>
+                            <p class="text-sm text-slate-600 dark:text-slate-300 mt-0.5">
+                                Women's College of Computer Studies and Research, Sawantwadi (SNDT Women's University, Mumbai)
+                            </p>
+                        </div>
+
+                        <!-- HSC -->
+                        <div class="p-5 rounded-2xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 card-print">
+                            <div class="flex flex-wrap items-center justify-between gap-2 mb-1">
+                                <span class="px-2.5 py-0.5 rounded-md text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
+                                    2023 • 56.33%
+                                </span>
+                            </div>
+                            <h3 class="text-base font-bold text-slate-900 dark:text-white">
+                                Higher Secondary Certificate (HSC - Science)
+                            </h3>
+                            <p class="text-sm text-slate-600 dark:text-slate-300 mt-0.5">
+                                Kudal High School Jr. College, Kudal
+                            </p>
+                        </div>
+
+                        <!-- SSC -->
+                        <div class="p-5 rounded-2xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 card-print">
+                            <div class="flex flex-wrap items-center justify-between gap-2 mb-1">
+                                <span class="px-2.5 py-0.5 rounded-md text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
+                                    2021 • 82.20%
+                                </span>
+                            </div>
+                            <h3 class="text-base font-bold text-slate-900 dark:text-white">
+                                Secondary School Certificate (SSC)
+                            </h3>
+                            <p class="text-sm text-slate-600 dark:text-slate-300 mt-0.5">
+                                Kudal High School, Kudal
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certifications (5 Cols) -->
+                <div class="lg:col-span-5">
+                    <div class="mb-8">
+                        <span class="text-xs font-mono uppercase tracking-widest text-indigo-600 dark:text-indigo-400 font-semibold">06 / Credentials</span>
+                        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mt-1">Certifications</h2>
+                        <div class="w-12 h-1 bg-indigo-600 rounded-full mt-3"></div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <!-- Cert 1 -->
+                        <div class="p-5 rounded-2xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 card-print flex items-start gap-3.5">
+                            <div class="p-2.5 rounded-xl bg-purple-500/10 text-purple-600 dark:text-purple-400 shrink-0 mt-0.5">
+                                <i data-lucide="award" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-slate-900 dark:text-white text-sm sm:text-base">
+                                    Generative AI Specialization
+                                </h3>
+                                <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-0.5">
+                                    Outskill
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Cert 2 -->
+                        <div class="p-5 rounded-2xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 card-print flex items-start gap-3.5">
+                            <div class="p-2.5 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5">
+                                <i data-lucide="shield" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <div class="flex flex-wrap items-center gap-2">
+                                    <h3 class="font-bold text-slate-900 dark:text-white text-sm sm:text-base">
+                                        Cybersecurity with AI
+                                    </h3>
+                                    <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-amber-500/15 text-amber-700 dark:text-amber-400">
+                                        In Progress
+                                    </span>
+                                </div>
+                                <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-0.5">
+                                    Skillected, Pune
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Cert 3 -->
+                        <div class="p-5 rounded-2xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 card-print flex items-start gap-3.5">
+                            <div class="p-2.5 rounded-xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 shrink-0 mt-0.5">
+                                <i data-lucide="briefcase" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-slate-900 dark:text-white text-sm sm:text-base">
+                                    TCS iON Career Edge – Young Professional
+                                </h3>
+                                <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-0.5">
+                                    Tata Consultancy Services (TCS iON)
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Cert 4 -->
+                        <div class="p-5 rounded-2xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 card-print flex items-start gap-3.5">
+                            <div class="p-2.5 rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 shrink-0 mt-0.5">
+                                <i data-lucide="monitor" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-slate-900 dark:text-white text-sm sm:text-base">
+                                    Course on Computer Concepts (CCC)
+                                </h3>
+                                <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-0.5">
+                                    NIELIT
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- CONTACT & INTERACTIVE LINKEDIN SHARE / LINK CUSTOMIZER -->
+        <section id="contact" class="py-14 border-t border-slate-200/80 dark:border-slate-800/80">
+            <div class="mb-10">
+                <span class="text-xs font-mono uppercase tracking-widest text-indigo-600 dark:text-indigo-400 font-semibold">07 / Connect</span>
+                <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mt-1">Contact & Recruiter Quick-Share</h2>
+                <div class="w-12 h-1 bg-indigo-600 rounded-full mt-3"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <!-- Left: Editable & Copyable Social Links -->
+                <div class="lg:col-span-6 space-y-4">
+                    <div class="p-6 rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 shadow-sm card-print space-y-5">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="text-lg font-bold text-slate-900 dark:text-white">Direct Profiles & Links</h3>
+                                <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5 no-print">
+                                    Click the edit icon to update your URLs anytime, or copy with one tap.
+                                </p>
+                            </div>
+                            <span class="px-2.5 py-1 rounded-lg text-xs font-mono bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 no-print">
+                                Editable
+                            </span>
+                        </div>
+
+                        <!-- Email Field -->
+                        <div class="space-y-1.5">
+                            <label class="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
+                                <i data-lucide="mail" class="w-3.5 h-3.5 text-indigo-500"></i>
+                                Email Address
+                            </label>
+                            <div class="flex items-center gap-2">
+                                <input id="input-email" type="text" value="taniya.munankar@example.com" readonly
+                                    class="w-full px-3.5 py-2.5 rounded-xl text-sm font-mono bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 focus:outline-none focus:border-indigo-500">
+                                <button onclick="toggleEdit('input-email', this)" title="Edit Email" class="p-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 no-print">
+                                    <i data-lucide="pencil" class="w-4 h-4"></i>
+                                </button>
+                                <button onclick="copyField('input-email', 'Email address copied!')" title="Copy Email" class="p-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white no-print">
+                                    <i data-lucide="copy" class="w-4 h-4"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- LinkedIn Field -->
+                        <div class="space-y-1.5">
+                            <label class="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
+                                <i data-lucide="linkedin" class="w-3.5 h-3.5 text-blue-500"></i>
+                                LinkedIn Profile URL
+                            </label>
+                            <div class="flex items-center gap-2">
+                                <input id="input-linkedin" type="text" value="https://linkedin.com/in/taniya-munankar" readonly
+                                    class="w-full px-3.5 py-2.5 rounded-xl text-sm font-mono bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 focus:outline-none focus:border-indigo-500">
+                                <button onclick="toggleEdit('input-linkedin', this)" title="Edit LinkedIn URL" class="p-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 no-print">
+                                    <i data-lucide="pencil" class="w-4 h-4"></i>
+                                </button>
+                                <button onclick="copyField('input-linkedin', 'LinkedIn URL copied!')" title="Copy LinkedIn URL" class="p-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white no-print">
+                                    <i data-lucide="copy" class="w-4 h-4"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- GitHub Field -->
+                        <div class="space-y-1.5">
+                            <label class="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
+                                <i data-lucide="github" class="w-3.5 h-3.5 text-slate-700 dark:text-slate-300"></i>
+                                GitHub Profile URL
+                            </label>
+                            <div class="flex items-center gap-2">
+                                <input id="input-github" type="text" value="https://github.com/taniyamunankar" readonly
+                                    class="w-full px-3.5 py-2.5 rounded-xl text-sm font-mono bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 focus:outline-none focus:border-indigo-500">
+                                <button onclick="toggleEdit('input-github', this)" title="Edit GitHub URL" class="p-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 no-print">
+                                    <i data-lucide="pencil" class="w-4 h-4"></i>
+                                </button>
+                                <button onclick="copyField('input-github', 'GitHub URL copied!')" title="Copy GitHub URL" class="p-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white no-print">
+                                    <i data-lucide="copy" class="w-4 h-4"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Interactive Recruiter Message Generator / Copy Box -->
+                <div class="lg:col-span-6 no-print">
+                    <div class="p-6 rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 shadow-sm h-full flex flex-col justify-between space-y-4">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                                    <i data-lucide="message-square-text" class="w-5 h-5 text-indigo-500"></i>
+                                    <span>Quick Message Generator</span>
+                                </h3>
+                                <div class="flex rounded-lg bg-slate-100 dark:bg-slate-800 p-1 text-xs font-semibold">
+                                    <button id="mode-reply" onclick="setMessageMode('reply')" class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-700 text-indigo-600 dark:text-indigo-300 shadow-sm transition-all">
+                                        Reply to Recruiter
+                                    </button>
+                                    <button id="mode-recruiter" onclick="setMessageMode('recruiter')" class="px-2.5 py-1 rounded-md text-slate-600 dark:text-slate-400 transition-all">
+                                        Hire Taniya
+                                    </button>
+                                </div>
+                            </div>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mb-3">
+                                Automatically includes your customized GitHub/LinkedIn links above. Ready to paste into LinkedIn!
+                            </p>
+
+                            <textarea id="generated-message" rows="6" class="w-full p-3.5 rounded-xl text-sm bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-200 focus:outline-none focus:border-indigo-500 leading-relaxed resize-none"></textarea>
+                        </div>
+
+                        <div class="flex flex-wrap items-center justify-between gap-3 pt-1">
+                            <button onclick="copyField('generated-message', 'Message copied! Ready to paste on LinkedIn.')" class="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold bg-indigo-600 hover:bg-indigo-700 text-white shadow-md shadow-indigo-600/20 transition-all">
+                                <i data-lucide="copy" class="w-4 h-4"></i>
+                                <span>Copy Message</span>
+                            </button>
+                            <button onclick="window.print()" class="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-semibold bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700 transition-all">
+                                <i data-lucide="download" class="w-4 h-4 text-indigo-500"></i>
+                                <span>PDF</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-200 dark:border-slate-800/80 py-8 mt-8 text-center text-sm text-slate-500 dark:text-slate-400">
+        <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p>© 2026 <strong class="text-slate-700 dark:text-slate-200">Taniya Tulshidas Munankar</strong>. All rights reserved.</p>
+            <p class="font-mono text-xs">Kudal, Sindhudurg, Maharashtra, India</p>
+        </div>
+    </footer>
+
+    <!-- Interactive Script -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // 1. Dark / Light Theme Toggle
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const htmlEl = document.documentElement;
+
+        themeToggleBtn.addEventListener('click', () => {
+            htmlEl.classList.toggle('dark');
+        });
+
+        // 2. Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // 3. Project Category Filtering
+        function filterProjects(category) {
+            const cards = document.querySelectorAll('.project-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            buttons.forEach(btn => {
+                if (btn.dataset.filter === category) {
+                    btn.classList.remove('bg-white', 'dark:bg-slate-900', 'text-slate-700', 'dark:text-slate-300', 'border', 'border-slate-200', 'dark:border-slate-800');
+                    btn.classList.add('bg-indigo-600', 'text-white', 'shadow-sm');
+                } else {
+                    btn.classList.remove('bg-indigo-600', 'text-white', 'shadow-sm');
+                    btn.classList.add('bg-white', 'dark:bg-slate-900', 'text-slate-700', 'dark:text-slate-300', 'border', 'border-slate-200', 'dark:border-slate-800');
+                }
+            });
+
+            cards.forEach(card => {
+                const categories = card.dataset.categories.split(' ');
+                if (category === 'all' || categories.includes(category)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // 4. Toast Notification Helper (No alert())
+        let toastTimeout;
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-message');
+            toastMsg.textContent = message;
+
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        // 5. Clipboard Copy Helper (Uses execCommand for iFrame compatibility)
+        function copyTextToClipboard(text, successMsg) {
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = text;
+            tempTextArea.style.position = 'fixed';
+            tempTextArea.style.left = '-9999px';
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+            try {
+                document.execCommand('copy');
+                showToast(successMsg);
+            } catch (err) {
+                showToast('Unable to copy automatically. Please select and copy.');
+            }
+            document.body.removeChild(tempTextArea);
+        }
+
+        function copyField(elementId, successMsg) {
+            const el = document.getElementById(elementId);
+            if (el) {
+                copyTextToClipboard(el.value, successMsg);
+            }
+        }
+
+        // 6. Editable Contact Inputs + Auto-Sync Message Box
+        let currentMessageMode = 'reply';
+
+        function toggleEdit(inputId, btn) {
+            const input = document.getElementById(inputId);
+            const isReadOnly = input.hasAttribute('readonly');
+
+            if (isReadOnly) {
+                input.removeAttribute('readonly');
+                input.focus();
+                input.select();
+                input.classList.add('ring-2', 'ring-indigo-500');
+                btn.innerHTML = '<i data-lucide="check" class="w-4 h-4 text-emerald-500"></i>';
+                lucide.createIcons();
+            } else {
+                input.setAttribute('readonly', true);
+                input.classList.remove('ring-2', 'ring-indigo-500');
+                btn.innerHTML = '<i data-lucide="pencil" class="w-4 h-4"></i>';
+                lucide.createIcons();
+                updateGeneratedMessage();
+                showToast('Link updated in portfolio!');
+            }
+        }
+
+        // Update message live when user types in inputs
+        ['input-email', 'input-linkedin', 'input-github'].forEach(id => {
+            document.getElementById(id).addEventListener('input', updateGeneratedMessage);
+        });
+
+        function setMessageMode(mode) {
+            currentMessageMode = mode;
+            const replyBtn = document.getElementById('mode-reply');
+            const recruiterBtn = document.getElementById('mode-recruiter');
+
+            if (mode === 'reply') {
+                replyBtn.className = 'px-2.5 py-1 rounded-md bg-white dark:bg-slate-700 text-indigo-600 dark:text-indigo-300 shadow-sm transition-all';
+                recruiterBtn.className = 'px-2.5 py-1 rounded-md text-slate-600 dark:text-slate-400 transition-all';
+            } else {
+                recruiterBtn.className = 'px-2.5 py-1 rounded-md bg-white dark:bg-slate-700 text-indigo-600 dark:text-indigo-300 shadow-sm transition-all';
+                replyBtn.className = 'px-2.5 py-1 rounded-md text-slate-600 dark:text-slate-400 transition-all';
+            }
+            updateGeneratedMessage();
+        }
+
+        function updateGeneratedMessage() {
+            const email = document.getElementById('input-email').value.trim();
+            const linkedin = document.getElementById('input-linkedin').value.trim();
+            const github = document.getElementById('input-github').value.trim();
+            const msgBox = document.getElementById('generated-message');
+
+            if (currentMessageMode === 'reply') {
+                msgBox.value = `Hello [Name],\n\nThank you for reaching out! As requested, I am sharing my portfolio and profile details below:\n\n💻 GitHub / Projects: ${github}\n🔗 LinkedIn: ${linkedin}\n📧 Email: ${email}\n📄 Resume: [Paste your Google Drive CV Link here]\n\nI am a Full-Stack Developer (MERN, C# .NET, PHP/MySQL) with a BCA (8.71 CGPA), currently pursuing my MCA at SPPU. Looking forward to connecting!\n\nBest regards,\nTaniya Munankar`;
+            } else {
+                msgBox.value = `Hi Taniya,\n\nI came across your developer portfolio and was impressed by your work on LabMasterPro and the AI Flashcard system. We have an opportunity that aligns well with your Full-Stack & AI skills.\n\nAre you available for a quick chat this week?\n\nBest,\n[Recruiter Name]`;
+            }
+        }
+
+        function copyRecruiterPitch() {
+            const github = document.getElementById('input-github').value.trim();
+            const email = document.getElementById('input-email').value.trim();
+            const summary = `Taniya Munankar — Full-Stack Web Developer | AI & Cybersecurity Enthusiast | MCA Student (SPPU) | BCA (8.71 CGPA)\nSkills: MERN Stack, C# .NET, PHP/MySQL, Python, Ollama API, AWS.\nGitHub: ${github} | Email: ${email}`;
+            copyTextToClipboard(summary, 'Portfolio summary copied for LinkedIn!');
+        }
+
+        // Initialize default message on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            updateGeneratedMessage();
+        });
+    </script>
+</body>
+</html>
